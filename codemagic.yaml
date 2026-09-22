@@ -6,17 +6,11 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: |
-          PUBSPEC_PATH=$(find . -name "pubspec.yaml" -not -path "*/.*" | head -n 1)
-          if [ -n "$PUBSPEC_PATH" ]; then
-            cd $(dirname "$PUBSPEC_PATH")
-          fi
+          cd app
           flutter packages pub get
       - name: Build APK
         script: |
-          PUBSPEC_PATH=$(find . -name "pubspec.yaml" -not -path "*/.*" | head -n 1)
-          if [ -n "$PUBSPEC_PATH" ]; then
-            cd $(dirname "$PUBSPEC_PATH")
-          fi
+          cd app
           flutter build apk --release
     artifacts:
-      - "**/build/app/outputs/flutter-apk/*.apk"
+      - app/build/app/outputs/flutter-apk/*.apk
